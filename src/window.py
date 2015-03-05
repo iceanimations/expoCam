@@ -1,28 +1,22 @@
+
+import os
+osp = os.path
+import window
+selfPath = window.__file__
 import PyQt4
 from PyQt4 import QtGui, QtCore, uic
 Qt = QtCore.Qt
-import os
-osp = os.path
-import sys
 import logic
 import time
 import subprocess
 import re
-import site
-import window
-selfPath = window.__file__
-print selfPath
-site.addsitedir(osp.dirname(osp.dirname(selfPath)))
-import ui.ui_ui as ui
-form, base = ui.Ui_MainWindow, QtGui.QMainWindow
-#form, base = uic.loadUiType(r"%s\ui\ui.ui"%osp.dirname(osp.dirname(window.__file__)))
+
+form, base = uic.loadUiType(r"%s\ui\ui.ui"%osp.dirname(osp.dirname(window.__file__)))
 class Window(form, base):
     def __init__(self, parent = None):
         super(Window, self).__init__(parent)
         self.setupUi(self)
         self.initUi()
-        self.show()
-        #self.setStyleSheet("background-color: #696969")
 
     def initUi(self):
         self.exportButton.clicked.connect(self.export)
@@ -38,13 +32,21 @@ class Window(form, base):
         self.objects = []
         self.separateFiles = False
         self.spacerItem = None
-        self.setWindowIcon(QtGui.QIcon(r'%s\icons\ice.png' % osp.dirname(osp.dirname(selfPath))))
+        self.setWindowIcon(QtGui.QIcon(r'%s\icons\ef.png' % osp.dirname(osp.dirname(selfPath))))
         self.sourcePath = ''
         self.handleTypeBox()
         self.setWindowTitle("ExpoFast")
         self.scene = logic.Scene(self)
         self.iSize = QtCore.QSize(5,5)
         self.setIconSize(self.iSize)
+        #system tray icon
+        self.createSystemTrayIcon()
+        
+    def createSystemTrayIcon(self):
+        self.trayIcon = QtGui.QSystemTrayIcon(self)
+        self.trayIcon.setIcon(QtGui.QIcon(r'%s\icons\ef.png' % osp.dirname(osp.dirname(selfPath))))
+        self.trayIcon.setToolTip('expoFast')
+        self.trayIcon.show()
 
     def dialogCaller(self):
         '''opens the appropriate file dialog'''
@@ -141,6 +143,9 @@ class Window(form, base):
             self.noObjectsLabel.setText("No "+ self.objectType +" found...")
             self.noObjectsLabel.show()
             self.noObjectsLabel.repaint(1,1,1,1)
+        self.trayIcon.showMessage('expoFast objects ready',
+                                  'expoFast is done with the fetching and listing of the objects',
+                                  QtGui.QSystemTrayIcon.Information, 5000)
 
     def export(self):
         self.targetPath = str(self.targetPathBox.text()).strip('\"')
@@ -230,12 +235,3 @@ class Window(form, base):
             mBox.setStandardButtons(args['btns'])
             buttonPressed = mBox.exec_()
             return buttonPressed
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-    app.setStyle(QtGui.QStyleFactory.create("plastique"))
-    win = Window()
-    sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    main()
