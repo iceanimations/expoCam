@@ -9,6 +9,11 @@ import uiContainer
 from PyQt4.QtGui import *
 import os.path as osp
 selfPath = __file__
+sys.path.append( 'C:\solidangle\mtoadeploy\2015\scripts' )
+import maya.standalone
+maya.standalone.initialize()
+import maya.cmds as cmds
+cmds.loadPlugin('mtoa')
 
 def main(*args):
     app = QApplication(sys.argv)
