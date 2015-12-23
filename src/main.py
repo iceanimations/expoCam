@@ -4,12 +4,11 @@ Created on Aug 22, 2013
 '''
 import site
 import sys
-site.addsitedir(r"R:\Pipe_Repo\Users\Qurban\mayaize")
-import mayaize2013
-site.addsitedir(r"R:\Python_Scripts")
+site.addsitedir("R:/Python_Scripts/plugins/utilities")
+import uiContainer
 from PyQt4.QtGui import *
 import os.path as osp
-selfPath = sys.modules[__name__].__file__
+selfPath = __file__
 
 def main(*args):
     app = QApplication(sys.argv)
