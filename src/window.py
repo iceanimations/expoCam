@@ -193,7 +193,10 @@ class Window(form, base):
 
     def gotoLocation(self, path):
         if path and osp.exists(path):
-            subprocess.Popen('explorer /select' + ',' + osp.normpath(path))
+            s = ' '
+            if osp.isfile(path):
+                s = ' /select,'
+            subprocess.Popen('explorer%s'%s + osp.normpath(path))
 
     def showSaveDialog(self):
         path = QtGui.QFileDialog.getSaveFileName(self, 'File name', '',  '*.ma *.mb')
