@@ -118,7 +118,7 @@ class Window(form, base):
             self.noObjectsLabel.show()
             self.noObjectsLabel.setText("Extracting "+ self.objectType + "s...")
             self.noObjectsLabel.repaint(1,1,1,1)
-            self.scene.openScene(path)
+            self.scene.openScene(path, self.referenceButton.isChecked())
             self.sourcePath = path
         self.listObjects()
 

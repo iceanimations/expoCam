@@ -122,7 +122,7 @@
          <x>0</x>
          <y>0</y>
          <width>577</width>
-         <height>191</height>
+         <height>195</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="objectsLayout">
@@ -209,16 +209,30 @@
      </widget>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="separateFilesButton">
+        <property name="text">
+         <string>Export as separate files</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="referenceButton">
+        <property name="text">
+         <string>Load no references</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="Line" name="line_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="separateFilesButton">
-      <property name="text">
-       <string>Export as separate files</string>
       </property>
      </widget>
     </item>
@@ -285,7 +299,7 @@
      <x>0</x>
      <y>0</y>
      <width>599</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

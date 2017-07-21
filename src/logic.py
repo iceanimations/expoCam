@@ -8,9 +8,9 @@ class Scene:
                          'side', 'top', 'lambert1']
         self.parent = parent
 
-    def openScene(self, path):
+    def openScene(self, path, references):
         mc.file(path,
-                f = True, options = "v=0", o = True)
+                f = True, options = "v=0", o = True, loadNoReferences=references)
 
     def objects(self, typ):
         objectsList = []
